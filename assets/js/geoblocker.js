@@ -4,7 +4,7 @@ const blank = [""];
 if (window.location.pathname.endsWith("blocked.html") && localStorage.getItem("accessGranted") !== "true") {
   showAuthDiv();
 } else if (window.location.pathname.endsWith("blocked.html") && localStorage.getItem("accessGranted") === "true") {
-  window.location.href = "main.html";
+  window.location.href = "/";
 } else if (!window.location.pathname.endsWith("blocked.html") && localStorage.getItem("accessGranted") !== "true") {
   window.location.href = "blocked.html";
 }
@@ -49,7 +49,7 @@ function checkInviteCode() {
 
   if (validCodes.includes(inputCode)) {
     localStorage.setItem("accessGranted", "true");
-    window.location.href = "main.html";
+    window.location.href = "/";
   } else if (blank.includes(inputCode)) {
     console.log("blank");
   } else {
@@ -62,4 +62,5 @@ function checkInviteCode() {
         iframe.contentWindow.postMessage('startSequence', '*');
     }, 100); // 100ms delay
   }
+
 }

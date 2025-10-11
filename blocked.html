@@ -91,7 +91,7 @@
             box-shadow: var(--shadow-lg);
         }
         #myIframe {
-            display: none;
+            display: none; /* The blue screen is hidden until triggered */
         }
         .error-message {
             color: #ff4d75;
@@ -109,15 +109,14 @@
             <input type="text" id="invite-code" placeholder="XXXXXX">
             <button id="submit-btn"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-        <p class="error-message" id="error-message">Invalid access code. Please try again.</p>
+        <p class="error-message" id="error-message">Invalid access code.</p>
     </div>
     
     <iframe id="myIframe" src="banana.html"></iframe>
 
-    <!-- Links to your external script files -->
     <script src="assets/js/themes.js" defer></script>
     <script src="assets/js/settings.js" defer></script>
-    <script src="assets/js/geoblocker.js" defer></script> <!-- This handles the access codes -->
+    <script src="assets/js/geoblocker.js" defer></script>
     <script src="assets/js/profile.js" type="module" defer></script>
     <script src="assets/js/main.js" defer></script> 
 </body>

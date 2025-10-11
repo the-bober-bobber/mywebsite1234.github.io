@@ -14,26 +14,10 @@
       text-align: center;
       font-family: Arial, sans-serif;
       color: white;
-      background-color: black; /* Start black, JS will control color */
+      background-color: black;
       overflow: hidden;
       position: relative;
     }
-    
-    .container {
-      z-index: 1;
-    }
-    
-    .main-text {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .sub-text {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    /* Styles for all hidden screens */
     .screen {
       display: none;
       align-items: center;
@@ -43,126 +27,66 @@
       padding: 40px;
       box-sizing: border-box;
       flex-direction: column;
-      z-index: 2;
       position: absolute;
       top: 0; 
       left: 0;
     }
-
-    .bsod {
-      background-color: #0000AA;
-      color: white;
+    .visible {
+      display: flex !important;
+    }
+    .hide-cursor {
+      cursor: none;
     }
 
+    /* --- Screen Specific Styles --- */
+    #initialScreen .main-text { font-size: 48px; margin-bottom: 20px; }
+    #initialScreen .sub-text { font-size: 24px; margin-bottom: 10px; }
+
+    #bsodScreen { background-color: #0000AA; }
+    #bsodScreen .smiley { font-size: 60px; }
+    #bsodScreen .large { font-size: 24px; margin-top: 20px; }
+    #bsodScreen .code { font-size: 16px; color: #AAAAFF; margin-top: 20px; }
+    
     #cmdScreen {
       background-color: black;
-      color: #39FF14; /* Terminal Green */
+      color: #39FF14;
       font-family: 'Consolas', 'Courier New', monospace;
       font-size: 16px;
       align-items: flex-start;
       justify-content: flex-start;
       text-align: left;
     }
-
-    #cmdOutput {
-      white-space: pre-wrap;
-      margin: 0;
-    }
-
+    #cmdOutput { white-space: pre-wrap; margin: 0; }
     .cursor {
       background-color: #39FF14;
       animation: blink 1s step-start 0s infinite;
       display: inline-block;
       width: 10px;
       height: 18px;
-      margin-left: 2px;
     }
+    @keyframes blink { 50% { opacity: 0; } }
 
-    .smiley {
-      font-size: 60px;
-    }
+    #potatoScreen { background-color: #3d2d1d; }
+    #potatoScreen .potato-emoji { font-size: 150px; }
+    #potatoScreen .loading-bar-container { width: 50%; max-width: 600px; height: 30px; background-color: #555; border: 2px solid #fff; border-radius: 15px; overflow: hidden; margin-top: 40px; }
+    #potatoScreen .loading-bar { width: 0%; height: 100%; background-color: #f0e369; border-radius: 12px; }
+    #potatoScreen .loading-animation { animation: load 10s linear forwards; }
+    @keyframes load { from { width: 0%; } to { width: 100%; } }
+    #potatoScreen #loadingText { margin-top: 20px; font-size: 24px; font-family: 'Courier New', Courier, monospace; }
 
-    .large {
-      font-size: 24px;
-      margin-top: 20px;
-    }
-
-    .code {
-      font-size: 16px;
-      color: #AAAAFF;
-      margin-top: 20px;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .visible {
-      display: flex !important;
-    }
-
-    .hide-cursor {
-      cursor: none;
-    }
-    
-    #potatoScreen {
-       background-color: #3d2d1d;
-    }
-    .potato-emoji {
-      font-size: 150px;
-    }
-    .loading-bar-container {
-      width: 50%;
-      max-width: 600px;
-      height: 30px;
-      background-color: #555;
-      border: 2px solid #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      margin-top: 40px;
-    }
-    .loading-bar {
-      width: 0%;
-      height: 100%;
-      background-color: #f0e369;
-      border-radius: 12px;
-    }
-    .loading-animation {
-      animation: load 10s linear forwards;
-    }
-    @keyframes load {
-      from { width: 0%; }
-      to { width: 100%; }
-    }
-    
-    #loadingText {
-        margin-top: 20px;
-        font-size: 24px;
-        font-family: 'Courier New', Courier, monospace;
-    }
-    
-    #videoScreen {
-      background-color: black;
-      padding: 0;
-    }
-    
-    #videoPlayer {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
+    #videoScreen { background-color: black; padding: 0; }
+    #videoPlayer { width: 100%; height: 100%; object-fit: cover; }
   </style>
 </head>
 <body>
 
-  <div class="screen container" id="initialScreen">
+  <div class="screen" id="initialScreen">
     <p class="main-text">No one is safe</p>
     <p class="sub-text">The Blue screen of doom</p>
     <p class="sub-text">has come for you</p>
   </div>
 
-  <div class="screen bsod" id="bsodScreen">
+  <div class="screen" id="bsodScreen">
     <div>
       <div class="smiley">:(</div>
       <div class="large">
@@ -191,15 +115,10 @@
   </div>
   
   <div class="screen" id="videoScreen">
-    <video 
-      id="videoPlayer" 
-      src="video.mp4" 
-      playsinline>
-    </video>
+    <video id="videoPlayer" src="video.mp4" playsinline></video>
   </div>
 
   <script>
-    // Get references to all screens
     const screens = {
         initial: document.getElementById('initialScreen'),
         bsod: document.getElementById('bsodScreen'),
@@ -207,99 +126,87 @@
         potato: document.getElementById('potatoScreen'),
         video: document.getElementById('videoScreen')
     };
-
-    const progressBar = document.getElementById('progressBar');
     const videoPlayer = document.getElementById('videoPlayer');
-    const cmdOutput = document.getElementById('cmdOutput');
-    const cmdCursor = document.getElementById('cmdCursor');
-    
     let dotInterval;
     let isSequenceRunning = false;
 
-    // A helper function to show only one screen at a time
-    function showScreen(screenToShow) {
-        for (const screenKey in screens) {
-            screens[screenKey].classList.remove('visible');
-        }
-        if (screenToShow) {
-            screens[screenToShow].classList.add('visible');
-        }
+    function showScreen(screenKey) {
+        Object.values(screens).forEach(screen => screen.classList.remove('visible'));
+        if (screens[screenKey]) screens[screenKey].classList.add('visible');
     }
 
     function resetSequence() {
       isSequenceRunning = false;
       if (dotInterval) clearInterval(dotInterval);
-      
-      showScreen(null); // Hide all screens
+      showScreen(null);
       document.body.style.backgroundColor = 'black';
       document.body.classList.remove('hide-cursor');
-      
       videoPlayer.pause();
       videoPlayer.currentTime = 0;
-      progressBar.classList.remove('loading-animation');
-      cmdOutput.innerHTML = '';
+      document.getElementById('progressBar').classList.remove('loading-animation');
+      document.getElementById('cmdOutput').innerHTML = '';
     }
 
     const sleep = ms => new Promise(res => {
-        // This promise will not resolve if the sequence has been cancelled
         const timeout = setTimeout(res, ms);
         const checkCancel = setInterval(() => {
             if (!isSequenceRunning) {
                 clearTimeout(timeout);
                 clearInterval(checkCancel);
+                res();
             }
         }, 100);
     });
     
-    const commands = [
-      '> HACKING SYSTEM...                [OK]',
-      '> CHECKING ROOT VEGETABLE SYSTEM...',
-      '> KERNEL: Starch Kernel 5.8-3',
-      '> LOADING TUBER DRIVERS...         [OK]',
-      '> CALIBRATING PEELER.DLL...        [OK]',
-      '> ALLOCATING STARCH MEMORY...      [OK]',
-      '> BOOTING FROM PRIMARY PARTITION...',
-      '> ',
-      '> EXECUTE C:\\SYSTEM\\POTATO.EXE -OVERRIDE',
-      '> ',
-      '> INITIATING POTATO COMPUTER...'
-    ];
-
     async function typeCommands() {
+      const cmdOutput = document.getElementById('cmdOutput');
+      const cmdCursor = document.getElementById('cmdCursor');
+      const commands = [
+          '> HACKING SYSTEM...                [OK]',
+          '> CHECKING ROOT VEGETABLE SYSTEM...',
+          '> KERNEL: Starch Kernel 5.8-3',
+          '> LOADING TUBER DRIVERS...         [OK]',
+          '> CALIBRATING PEELER.DLL...        [OK]',
+          '> ALLOCATING STARCH MEMORY...      [OK]',
+          '> BOOTING FROM PRIMARY PARTITION...',
+          '> ',
+          '> EXECUTE C:\\SYSTEM\\POTATO.EXE -OVERRIDE',
+          '> ',
+          '> INITIATING POTATO COMPUTER...'
+      ];
       cmdCursor.style.display = 'inline-block';
       for (const line of commands) {
         for (const char of line) {
           if (!isSequenceRunning) return;
           cmdOutput.innerHTML += char;
-          await sleep(10);
+          await sleep(10); // Original faster speed
         }
         cmdOutput.innerHTML += '<br>';
-        await sleep(100);
+        await sleep(100); // Original faster speed
       }
       cmdCursor.style.display = 'none';
     }
 
-    // MODIFIED: Rewritten sequence with clear, visible steps.
     async function startSequence() {
       if (isSequenceRunning) return;
       isSequenceRunning = true;
       resetSequence();
-      isSequenceRunning = true;
+      isSequenceRunning = true; // Set again after reset
 
-      // --- Step 1: Initial Screen ---
+      // Step 1: Initial Screen
       document.body.style.backgroundColor = 'blue';
       showScreen('initial');
       await sleep(5000);
       if (!isSequenceRunning) return;
       
-      // --- Step 2: Blue Screen ---
+      // Step 2: Blue Screen
       document.body.style.backgroundColor = '#0000AA';
       document.body.classList.add('hide-cursor');
       showScreen('bsod');
       await sleep(10000);
       if (!isSequenceRunning) return;
 
-      // --- Step 3: Command Prompt ---
+      // Step 3: Command Prompt
       document.body.style.backgroundColor = 'black';
       showScreen('cmd');
       await typeCommands();
@@ -307,10 +214,9 @@
       await sleep(2000);
       if (!isSequenceRunning) return;
 
-      // --- Step 4: Potato Screen ---
+      // Step 4: Potato Screen
       showScreen('potato');
-      void progressBar.offsetWidth; 
-      progressBar.classList.add('loading-animation');
+      document.getElementById('progressBar').classList.add('loading-animation');
       const loadingText = document.getElementById('loadingText');
       let dotCount = 0;
       dotInterval = setInterval(() => {
@@ -320,7 +226,7 @@
       await sleep(10000);
       if (!isSequenceRunning) return;
 
-      // --- Step 5: Video Screen ---
+      // Step 5: Video Screen
       clearInterval(dotInterval);
       showScreen('video');
       videoPlayer.play();

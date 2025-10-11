@@ -1,226 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>No one is safe</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            color: white;
-            background-color: black; /* Default background */
-            overflow: hidden;
-            position: relative;
-        }
-        .screen {
-            display: none; /* All screens are hidden by default */
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            padding: 40px;
-            box-sizing: border-box;
-            flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .visible {
-            display: flex !important; /* Class to show a screen */
-        }
-        .hide-cursor {
-            cursor: none;
-        }
+  <meta charset="UTF-8" />
+  <title>No one is safe</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      background-color: black; /* Start black, JS will control color */
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .container {
+      z-index: 1;
+    }
+    
+    .main-text {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
 
-        /* --- Screen Specific Styles --- */
-        #initialScreen { background-color: #0000FF; }
-        #initialScreen .main-text { font-size: 48px; margin-bottom: 20px; }
-        #initialScreen .sub-text { font-size: 24px; }
+    .sub-text {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
 
-        #bsodScreen { background-color: #0000AA; }
-        #bsodScreen .smiley { font-size: 60px; }
-        #bsodScreen .large { font-size: 24px; margin-top: 20px; }
-        #bsodScreen .code { font-size: 16px; color: #AAAAFF; margin-top: 20px; }
-        
-        #cmdScreen {
-            background-color: black;
-            color: #39FF14;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 16px;
-            align-items: flex-start;
-            justify-content: flex-start;
-            text-align: left;
-        }
-        #cmdOutput { white-space: pre-wrap; margin: 0; }
-        .cursor {
-            background-color: #39FF14;
-            animation: blink 1s step-start 0s infinite;
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
+    /* Styles for all hidden screens */
+    .screen {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      flex-direction: column;
+      z-index: 2;
+      position: absolute;
+      top: 0; 
+      left: 0;
+    }
 
-        #potatoScreen { background-color: #3d2d1d; }
-        #potatoScreen .potato-emoji { font-size: 150px; }
-        #potatoScreen .loading-bar-container { width: 50%; max-width: 600px; height: 30px; background-color: #555; border: 2px solid #fff; border-radius: 15px; overflow: hidden; margin-top: 40px; }
-        #potatoScreen .loading-bar { width: 0%; height: 100%; background-color: #f0e369; border-radius: 12px; }
-        #potatoScreen .loading-animation { animation: load 10s linear forwards; }
-        @keyframes load { from { width: 0%; } to { width: 100%; } }
-        #potatoScreen #loadingText { margin-top: 20px; font-size: 24px; font-family: 'Courier New', Courier, monospace; }
+    .bsod {
+      background-color: #0000AA;
+      color: white;
+    }
 
-        #videoScreen { background-color: black; padding: 0; }
-        #videoPlayer { width: 100%; height: 100%; object-fit: cover; }
-    </style>
+    #cmdScreen {
+      background-color: black;
+      color: #39FF14; /* Terminal Green */
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 16px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    #cmdOutput {
+      white-space: pre-wrap;
+      margin: 0;
+    }
+
+    .cursor {
+      background-color: #39FF14;
+      animation: blink 1s step-start 0s infinite;
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      margin-left: 2px;
+    }
+
+    .smiley {
+      font-size: 60px;
+    }
+
+    .large {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    .code {
+      font-size: 16px;
+      color: #AAAAFF;
+      margin-top: 20px;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .visible {
+      display: flex !important;
+    }
+
+    .hide-cursor {
+      cursor: none;
+    }
+    
+    #potatoScreen {
+       background-color: #3d2d1d;
+    }
+    .potato-emoji {
+      font-size: 150px;
+    }
+    .loading-bar-container {
+      width: 50%;
+      max-width: 600px;
+      height: 30px;
+      background-color: #555;
+      border: 2px solid #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .loading-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #f0e369;
+      border-radius: 12px;
+    }
+    .loading-animation {
+      animation: load 10s linear forwards;
+    }
+    @keyframes load {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    
+    #loadingText {
+        margin-top: 20px;
+        font-size: 24px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    #videoScreen {
+      background-color: black;
+      padding: 0;
+    }
+    
+    #videoPlayer {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+  </style>
 </head>
 <body>
 
-    <div class="screen" id="initialScreen">
-        <div>
-            <p class="main-text">No one is safe</p>
-            <p class="sub-text">The Blue screen of doom has come for you</p>
-        </div>
-    </div>
+  <div class="screen container" id="initialScreen">
+    <p class="main-text">No one is safe</p>
+    <p class="sub-text">The Blue screen of doom</p>
+    <p class="sub-text">has come for you</p>
+  </div>
 
-    <div class="screen" id="bsodScreen">
-        <div>
-            <div class="smiley">:(</div>
-            <div class="large">Your PC ran into a problem and needs to restart.</div>
-            <div class="code">Stop code: CRITICAL_PROCESS_ERROR</div>
-        </div>
+  <div class="screen bsod" id="bsodScreen">
+    <div>
+      <div class="smiley">:(</div>
+      <div class="large">
+        Your PC ran into a problem and needs to restart.<br>
+        We're just collecting some error info, and then we'll restart for you.
+      </div>
+      <p>For more information about this issue and possible fixes, visit https://www.windows.com/stopcode</p>
+      <p>If you call a support person, give them this info:</p>
+      <div class="code">Stop code: CRITICAL_PROCESS_ERROR</div>
+      <div class="code">	ERROR_CODE: 3485X4_34</div>
     </div>
+  </div>
 
-    <div class="screen" id="cmdScreen">
-        <div>
-            <pre id="cmdOutput"></pre><span class="cursor" id="cmdCursor"></span>
-        </div>
+  <div class="screen" id="cmdScreen">
+    <div>
+      <pre id="cmdOutput"></pre><span class="cursor" id="cmdCursor"> </span>
     </div>
+  </div>
 
-    <div class="screen" id="potatoScreen">
-        <div class="potato-emoji">🥔</div>
-        <div class="loading-bar-container">
-            <div class="loading-bar" id="progressBar"></div>
-        </div>
-        <p id="loadingText">potato computer loading</p>
+  <div class="screen" id="potatoScreen">
+    <div class="potato-emoji">🥔</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="progressBar"></div>
     </div>
+    <p id="loadingText">potato computer loading</p>
+  </div>
   
-    <div class="screen" id="videoScreen">
-        <video id="videoPlayer" src="video.mp4" playsinline></video>
-    </div>
+  <div class="screen" id="videoScreen">
+    <video 
+      id="videoPlayer" 
+      src="video.mp4" 
+      playsinline>
+    </video>
+  </div>
 
-    <script>
-        const screens = {
-            initial: document.getElementById('initialScreen'),
-            bsod: document.getElementById('bsodScreen'),
-            cmd: document.getElementById('cmdScreen'),
-            potato: document.getElementById('potatoScreen'),
-            video: document.getElementById('videoScreen')
-        };
-        const videoPlayer = document.getElementById('videoPlayer');
-        let isSequenceRunning = false;
-        
-        function showScreen(screenKey) {
-            Object.values(screens).forEach(screen => screen.classList.remove('visible'));
-            if (screens[screenKey]) {
-                screens[screenKey].classList.add('visible');
+  <script>
+    // Get references to all screens
+    const screens = {
+        initial: document.getElementById('initialScreen'),
+        bsod: document.getElementById('bsodScreen'),
+        cmd: document.getElementById('cmdScreen'),
+        potato: document.getElementById('potatoScreen'),
+        video: document.getElementById('videoScreen')
+    };
+
+    const progressBar = document.getElementById('progressBar');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const cmdOutput = document.getElementById('cmdOutput');
+    const cmdCursor = document.getElementById('cmdCursor');
+    
+    let dotInterval;
+    let isSequenceRunning = false;
+
+    // A helper function to show only one screen at a time
+    function showScreen(screenToShow) {
+        for (const screenKey in screens) {
+            screens[screenKey].classList.remove('visible');
+        }
+        if (screenToShow) {
+            screens[screenToShow].classList.add('visible');
+        }
+    }
+
+    function resetSequence() {
+      isSequenceRunning = false;
+      if (dotInterval) clearInterval(dotInterval);
+      
+      showScreen(null); // Hide all screens
+      document.body.style.backgroundColor = 'black';
+      document.body.classList.remove('hide-cursor');
+      
+      videoPlayer.pause();
+      videoPlayer.currentTime = 0;
+      progressBar.classList.remove('loading-animation');
+      cmdOutput.innerHTML = '';
+    }
+
+    const sleep = ms => new Promise(res => {
+        // This promise will not resolve if the sequence has been cancelled
+        const timeout = setTimeout(res, ms);
+        const checkCancel = setInterval(() => {
+            if (!isSequenceRunning) {
+                clearTimeout(timeout);
+                clearInterval(checkCancel);
             }
+        }, 100);
+    });
+    
+    const commands = [
+      '> HACKING SYSTEM...                [OK]',
+      '> CHECKING ROOT VEGETABLE SYSTEM...',
+      '> KERNEL: Starch Kernel 5.8-3',
+      '> LOADING TUBER DRIVERS...         [OK]',
+      '> CALIBRATING PEELER.DLL...        [OK]',
+      '> ALLOCATING STARCH MEMORY...      [OK]',
+      '> BOOTING FROM PRIMARY PARTITION...',
+      '> ',
+      '> EXECUTE C:\\SYSTEM\\POTATO.EXE -OVERRIDE',
+      '> ',
+      '> INITIATING POTATO COMPUTER...'
+    ];
+
+    async function typeCommands() {
+      cmdCursor.style.display = 'inline-block';
+      for (const line of commands) {
+        for (const char of line) {
+          if (!isSequenceRunning) return;
+          cmdOutput.innerHTML += char;
+          await sleep(10);
         }
+        cmdOutput.innerHTML += '<br>';
+        await sleep(100);
+      }
+      cmdCursor.style.display = 'none';
+    }
 
-        const sleep = ms => new Promise(resolve => {
-            const timeout = setTimeout(resolve, ms);
-            const checkCancel = setInterval(() => {
-                if (!isSequenceRunning) {
-                    clearTimeout(timeout);
-                    clearInterval(checkCancel);
-                    resolve(); // Resolve immediately if cancelled
-                }
-            }, 50);
-        });
+    // MODIFIED: Rewritten sequence with clear, visible steps.
+    async function startSequence() {
+      if (isSequenceRunning) return;
+      isSequenceRunning = true;
+      resetSequence();
+      isSequenceRunning = true;
 
-        async function typeCommands() {
-            const cmdOutput = document.getElementById('cmdOutput');
-            const cmdCursor = document.getElementById('cmdCursor');
-            const commands = [
-                '> HACKING SYSTEM...                [OK]',
-                '> CHECKING ROOT VEGETABLE SYSTEM...',
-                '> KERNEL: Starch Kernel 5.8-3',
-                '> LOADING TUBER DRIVERS...         [OK]',
-                '> EXECUTE C:\\SYSTEM\\POTATO.EXE -OVERRIDE',
-                '> INITIATING POTATO COMPUTER...'
-            ];
-            cmdCursor.style.display = 'inline-block';
-            for (const line of commands) {
-                for (const char of line) {
-                    if (!isSequenceRunning) return;
-                    cmdOutput.innerHTML += char;
-                    await sleep(20);
-                }
-                cmdOutput.innerHTML += '<br>';
-                await sleep(200);
-            }
-            cmdCursor.style.display = 'none';
+      // --- Step 1: Initial Screen ---
+      document.body.style.backgroundColor = 'blue';
+      showScreen('initial');
+      await sleep(5000);
+      if (!isSequenceRunning) return;
+      
+      // --- Step 2: Blue Screen ---
+      document.body.style.backgroundColor = '#0000AA';
+      document.body.classList.add('hide-cursor');
+      showScreen('bsod');
+      await sleep(10000);
+      if (!isSequenceRunning) return;
+
+      // --- Step 3: Command Prompt ---
+      document.body.style.backgroundColor = 'black';
+      showScreen('cmd');
+      await typeCommands();
+      if (!isSequenceRunning) return;
+      await sleep(2000);
+      if (!isSequenceRunning) return;
+
+      // --- Step 4: Potato Screen ---
+      showScreen('potato');
+      void progressBar.offsetWidth; 
+      progressBar.classList.add('loading-animation');
+      const loadingText = document.getElementById('loadingText');
+      let dotCount = 0;
+      dotInterval = setInterval(() => {
+          dotCount = (dotCount % 3) + 1;
+          loadingText.textContent = 'potato computer loading' + '.'.repeat(dotCount);
+      }, 500);
+      await sleep(10000);
+      if (!isSequenceRunning) return;
+
+      // --- Step 5: Video Screen ---
+      clearInterval(dotInterval);
+      showScreen('video');
+      videoPlayer.play();
+    };
+
+    window.addEventListener('message', function(event) {
+        if (event.data === 'startSequence') {
+            startSequence();
+        } else if (event.data === 'resetSequence') {
+            resetSequence();
         }
+    });
 
-        async function startSequence() {
-            if (isSequenceRunning) return;
-            isSequenceRunning = true;
-            
-            document.body.classList.add('hide-cursor');
-            
-            showScreen('initial');
-            await sleep(4000);
-            if (!isSequenceRunning) return;
-
-            showScreen('bsod');
-            await sleep(8000);
-            if (!isSequenceRunning) return;
-
-            showScreen('cmd');
-            await typeCommands();
-            if (!isSequenceRunning) return;
-            await sleep(2000);
-            if (!isSequenceRunning) return;
-            
-            showScreen('potato');
-            const progressBar = document.getElementById('progressBar');
-            progressBar.classList.add('loading-animation');
-            await sleep(10000);
-            if (!isSequenceRunning) return;
-
-            showScreen('video');
-            videoPlayer.play().catch(e => console.error("Video play failed:", e));
-        }
-
-        function resetSequence() {
-            isSequenceRunning = false;
-            showScreen(null);
-            document.body.classList.remove('hide-cursor');
-            document.getElementById('cmdOutput').innerHTML = '';
-            const progressBar = document.getElementById('progressBar');
-            progressBar.classList.remove('loading-animation');
-            videoPlayer.pause();
-            videoPlayer.currentTime = 0;
-        }
-
-        window.addEventListener('message', function(event) {
-            if (event.data === 'startSequence') {
-                startSequence();
-            } else if (event.data === 'resetSequence') {
-                resetSequence();
-            }
-        });
-
-        videoPlayer.onended = () => {
-            isSequenceRunning = false;
-            window.parent.postMessage('sequenceFinished', '*');
-        };
-    </script>
+    videoPlayer.onended = () => {
+      isSequenceRunning = false;
+      window.parent.postMessage('sequenceFinished', '*');
+    };
+  </script>
 </body>
 </html>
-

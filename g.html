@@ -6,7 +6,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-6H3WPQVTX0');
     </script>
     <meta charset="UTF-8">
@@ -20,52 +19,33 @@
     <style>
         :root {
             --primary: #fc2651;
-            --primary-hover: #e91e47;
-            --primary-light: rgba(252, 38, 81, 0.1);
             --text: #f1f5f9;
-            --text-muted: #94a3b8;
             --bg: #0f172a;
             --bg-secondary: #1e293b;
             --surface: #1e293b;
-            --surface-hover: #334155;
             --border: #334155;
-            --border-light: #475569;
             --glass: rgba(30, 41, 59, 0.8);
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.6);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7), 0 8px 10px -6px rgb(0 0 0 / 0.7);
             --radius: 12px;
             --radius-lg: 16px;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.6);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7), 0 8px 10px -6px rgb(0 0 0 / 0.7);
             --gradient-primary: linear-gradient(135deg, #fc2651 0%, #e91e47 100%);
             --gradient-surface: linear-gradient(135deg, #1e293b 0%, #334155 100%);
         }
-
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 0;
             background: var(--bg);
             color: var(--text);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
         header {
             background: var(--gradient-primary);
-            color: white;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: var(--shadow-lg);
         }
-
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -75,57 +55,51 @@
             justify-content: space-between;
             gap: 1.5rem;
         }
-
         .logo {
             font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             text-decoration: none;
         }
-
         #gameSearch {
             flex: 1;
             padding: 0.875rem 1rem;
             border: 0;
             border-radius: var(--radius);
             background: var(--glass);
-            backdrop-filter: blur(20px);
             color: var(--text);
             font-size: 15px;
             outline: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-sm);
-            width: 100%;
             max-width: 500px;
         }
-
-        #gameSearch:focus {
-            background: var(--text);
-            box-shadow: 0 0 0 3px rgba(252, 38, 81, 0.25), var(--shadow);
-            transform: translateY(-1px);
-            color: var(--bg);
+        .data-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-
-        #gameSearch::placeholder {
-            color: var(--text-muted);
+        .data-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
         }
-
+        .data-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
-
         .games-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1.5rem;
         }
-
         .game-card {
             background: var(--gradient-surface);
             border: 1px solid var(--border);
@@ -134,408 +108,284 @@
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            position: relative;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s;
         }
-        
         .game-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: var(--shadow-xl);
             border-color: var(--primary);
         }
-
         .game-card img {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            display: block;
-            background: var(--border-light);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .game-card:hover img {
-            transform: scale(1.05);
-        }
-
         .game-title {
             color: var(--text);
-            border: 0;
             padding: 1.25rem 1rem;
-            cursor: pointer;
             font-weight: 600;
             font-size: 14px;
-            line-height: 1.4;
             text-align: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 70px;
+            flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .game-card:hover .game-title {
-            color: var(--primary);
-            background: rgba(252, 38, 81, 0.05);
-        }
-        
-        .invis { display: none; }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            main {
-                padding: 1.5rem 1rem;
-            }
-            .games-container {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .games-container {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 1rem;
-            }
-            .game-card:hover {
-                transform: translateY(-4px) scale(1.01);
-            }
-        }
     </style>
 </head>
 <body>
-
     <header>
         <div class="header-content">
             <a href="/" class="logo">Classplay</a>
-            <input type="text" id="gameSearch" placeholder="Search through our games!" onkeyup="filterGames()" />
+            <input type="text" id="gameSearch" placeholder="Search games..." onkeyup="filterGames()" />
+            <div class="data-links">
+                <a onclick="saveData()">Export Data</a>
+                <a onclick="document.getElementById('importData').click()">Import Data</a>
+                <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
+            </div>
         </div>
     </header>
 
     <main>
         <div class="games-container">
-            <a href="https://forms.gle/ZRD1M73cgp8iv2757" class="game-card" id="Request">
-                <img src="img/gforms-logo.png" alt="Request a game">
-                <div class="game-title">Request a game</div>
-            </a>
-
-            <a href="https://forms.office.com/r/M4RjEEbAYh" class="game-card" id="bugs" style="cursor: pointer;">
-                <img src="img/randomizer.png" alt="report bugs">
-                <div class="game-title">Report Bugs</div>
-            </a>
-            
-            <a href="Eaglercraft_1.9.html" class="game-card" id="Minecraft">
-                <img src="img/mc.png" alt="Minecraft (works)">
-                <div class="game-title">Minecraft</div>
-            </a>
-
-            <a href="minesweeper.html" class="game-card" id="Minesweeper">
-                <img src="img/mc.png" alt="Minesweeper (works)">
-                <div class="game-title">Minesweeper</div>
-            </a>
-
-            <a href="Cookie_Clicker/Cookie-Clicker-Source-Code-master/index.html" class="game-card" id="cc" onclick="cookie()">
-                <img src="img/cookieclicker.png" alt="Cookie Clicker (works)">
-                <div class="game-title">Cookie Clicker</div>
-            </a>
-
-            <a href="/assets/games/html/dadish3.html" class="game-card" id="Dadish 3">
-                <img src="img/dadish3.png" alt="Dadish 3 (doesn't work)">
-                <div class="game-title">Dadish 3</div>
-            </a>
-
-            <a href="blocked.html" class="game-card" id="Super Mario 64" onclick="block()">
-                <img src="img/mario64.png" alt="Super Mario 64 (works)">
-                <div class="game-title">Super Mario 64</div>
-            </a>
-
-            <a href="/games/retro-bowl/" class="game-card" id="Retro Bowl">
-                <img src="img/retro-bowl.png" alt="Retro Bowl">
-                <div class="game-title">Retro Bowl</div>
-            </a>
-
-            <a href="/games/rb-college/" class="game-card" id="Retro Bowl College">
-                <img src="img/rb-college.png" alt="Retro Bowl College">
-                <div class="game-title">RB College <p class="invis">Retro Bowl College</p></div>
-            </a>
-
-            <a href="/games/football-bros/" class="game-card" id="Football Bros">
-                <img src="img/footballbros.png" alt="Football Bros">
-                <div class="game-title">Football Bros</div>
-            </a>
-
-            <a href="/games/polytrack/" class="game-card" id="Polytrack 4">
-                <img src="img/polytrack.png" alt="Polytrack 4">
-                <div class="game-title">Polytrack 4</div>
-            </a>
-
-            <a href="/games/slope/" class="game-card" id="Slope">
-                <img src="img/slope.png" alt="Slope">
-                <div class="game-title">Slope</div>
-            </a>
-
-            <a href="/games/amazing-rope-police/" class="game-card" id="Amazing Rope Police">
-                <img src="img/gta.png" alt="Amazing Rope Police">
-                <div class="game-title">Amazing Rope Police</div>
-            </a>
-
-            <a href="/games/run3/" class="game-card" id="Run 3">
-                <img src="img/run3.png" alt="Run 3">
-                <div class="game-title">Run 3</div>
-            </a>
-
-            <a href="/games/dadish-2/" class="game-card" id="Dadish 2">
-                <img src="img/dadish2.png" alt="Dadish 2">
-                <div class="game-title">Dadish 2</div>
-            </a>
-
-            <a href="/games/dadish/" class="game-card" id="Dadish">
-                <img src="img/dadish.png" alt="Dadish">
-                <div class="game-title">Dadish</div>
-            </a>
-
-            <a href="/games/sandboxels/" class="game-card" id="Sandboxels">
-                <img src="img/sandboxels.png" alt="Sandboxels">
-                <div class="game-title">Sandboxels</div>
-            </a>
-
-            <a href="/games/sandtris/" class="game-card" id="Sandtrix">
-                <img src="img/sandtrix.png" alt="Sandtrix">
-                <div class="game-title">Sandtrix</div>
-            </a>
-
-            <a href="/games/snowrider/" class="game-card" id="Snow Rider">
-                <img src="img/snowrider.png" alt="Snow Rider 3D">
-                <div class="game-title">Snow Rider 3D</div>
-            </a>
-
-            <a href="/games/asmallworldcup/" class="game-card" id="A Small World Cup">
-                <img src="img/aswc2023.png" alt="A Small World Cup 2023">
-                <div class="game-title">A Small World Cup 2023</div>
-            </a>
-
-            <a href="/games/1v1lol/" class="game-card" id="1v1 LOL">
-                <img src="img/1v1lol.png" alt="1v1 LOL">
-                <div class="game-title">1v1 LOL</div>
-            </a>
-
-            <a href="/games/ovo/" class="game-card" id="ovo">
-                <img src="img/ovo.png" alt="OvO">
-                <div class="game-title">OvO</div>
-            </a>
-
-            <a href="/games/basketbros/" class="game-card" id="Basket Bros">
-                <img src="img/basketbros.png" alt="Basket Bros">
-                <div class="game-title">Basket Bros</div>
-            </a>
-
-            <a href="/games/driftboss/" class="game-card" id="drift boss">
-                <img src="img/driftboss.png" alt="Drift Boss">
-                <div class="game-title">Drift Boss</div>
-            </a>
-
-            <a href="/games/html/gd" class="game-card" id="geometry dash gd">
-                <img src="img/gd.png" alt="Geometry Dash">
-                <div class="game-title">Geometry Dash <p class="invis">gd</p></div>
-            </a>
-
-            <a href="/games/fnaf/" class="game-card" id="FNAF">
-                <img src="img/fnaf.png" alt="FNAF">
-                <div class="game-title">FNAF</div>
-            </a>
-
-            <a href="/games/fnaf2/" class="game-card" id="FNAF 2">
-                <img src="img/fnaf2.png" alt="FNAF 2">
-                <div class="game-title">FNAF 2</div>
-            </a>
-
-            <a href="/games/fnaf3/" class="game-card" id="FNAF 3">
-                <img src="img/fnaf3.png" alt="FNAF 3">
-                <div class="game-title">FNAF 3</div>
-            </a>
-
-            <a href="/games/fnaf4/" class="game-card" id="FNAF 4">
-                <img src="img/fnaf4.png" alt="FNAF 4">
-                <div class="game-title">FNAF 4</div>
-            </a>
-
-            <a href="/games/owt1/" class="game-card" id="OWT 1">
-                <img src="img/owt1.png" alt="One Way Ticket">
-                <div class="game-title">One Way Ticket<p class="invis">OWT1, OWT 1</p></div>
-            </a>
-
-            <a href="/games/owt2/" class="game-card" id="OWT 2">
-                <img src="img/owt2.png" alt="One Way Ticket 2">
-                <div class="game-title">One Way Ticket 2<p class="invis">OWT2, OWT 2</p></div>
-            </a>
-
-            <a href="/games/html/territorial" class="game-card" id="Territorial">
-                <img src="img/territorial.png" alt="territorial.io">
-                <div class="game-title">territorial.io</div>
-            </a>
-
-            <a href="/games/worldshardestgame/" class="game-card" id="worlds hardest game">
-                <img src="img/whg.png" alt="World's Hardest Game">
-                <div class="game-title">World's Hardest Game</div>
-            </a>
-
-            <a href="/games/tic-tac-toe/" class="game-card" id="ttt">
-                <img src="img/ttt.png" alt="Tic Tac Toe">
-                <div class="game-title">Tic Tac Toe</div>
-            </a>
-
-            <a href="/games/2048/" class="game-card" id="2048">
-                <img src="img/2048.png" alt="2048">
-                <div class="game-title">2048</div>
-            </a>
-
-            <a href="/games/chess/" class="game-card" id="Chess">
-                <img src="img/chess.png" alt="Chess">
-                <div class="game-title">Chess</div>
-            </a>
-
-            <a href="/games/blockblast/" class="game-card" id="Block Blast">
-                <img src="img/blockblast.png" alt="Block Blast">
-                <div class="game-title">Block Blast</div>
-            </a>
-
-            <a href="/games/houseofhazards/" class="game-card" id="House of Hazards">
-                <img src="img/hoh.png" alt="House of Hazards">
-                <div class="game-title">House of Hazards</div>
-            </a>
-
-            <a href="/games/8ball/" class="game-card" id="8 Ball">
-                <img src="img/8ball.png" alt="8 Ball">
-                <div class="game-title">8 Ball</div>
-            </a>
-
-            <a href="/games/basketballstars/" class="game-card" id="Basketball Stars">
-                <img src="img/bballstars.png" alt="Basketball Stars">
-                <div class="game-title">Basketball Stars</div>
-            </a>
-
-            <a href="/games/btts/" class="game-card" id="Big Tower Tiny Square">
-                <img src="img/btts.png" alt="Big Tower Tiny Square">
-                <div class="game-title">Big Tower Tiny Square</div>
-            </a>
-
-            <a href="/games/html/alienshooter.html" class="game-card" id="Alien Shooter">
-                <img src="img/alienshooter.png" alt="Alien Shooter">
-                <div class="game-title">Alien Shooter</div>
-            </a>
-
-            <a href="/games/basketrandom/" class="game-card" id="Basket Random">
-                <img src="img/basketrandom.png" alt="Basket Random">
-                <div class="game-title">Basket Random</div>
-            </a>
-
-            <a href="/games/bitlife/" class="game-card" id="Bitlife">
-                <img src="img/bitlife.png" alt="Bitlife">
-                <div class="game-title">Bitlife</div>
-            </a>
-
-            <a href="/games/boxingrandom/" class="game-card" id="Boxing Random">
-                <img src="img/boxingrandom.png" alt="Boxing Random">
-                <div class="game-title">Boxing Random</div>
-            </a>
-
-            <a href="/games/clusterrush/" class="game-card" id="Cluster Rush">
-                <img src="img/clusterrush.png" alt="Cluster Rush">
-                <div class="game-title">Cluster Rush</div>
-            </a>
-
-            <a href="/games/eggycar/" class="game-card" id="Eggy Car">
-                <img src="img/eggycar.png" alt="Eggy Car">
-                <div class="game-title">Eggy Car</div>
-            </a>
-
-            <a href="/games/html/motox3m.html" class="game-card" id="Moto X3M">
-                <img src="img/motox3m.png" alt="Moto X3M">
-                <div class="game-title">Moto X3M</div>
-            </a>
-
-            <a href="/games/html/motox3m2.html" class="game-card" id="Moto X3M 2">
-                <img src="img/moto2.png" alt="Moto X3M 2">
-                <div class="game-title">Moto X3M 2</div>
-            </a>
-
-            <a href="/games/html/motox3m3.html" class="game-card" id="Moto X3M 3">
-                <img src="img/moto3.png" alt="Moto X3M 3">
-                <div class="game-title">Moto X3M 3</div>
-            </a>
-
-            <a href="/games/murder/" class="game-card" id="MURDER">
-                <img src="img/murder.png" alt="MURDER">
-                <div class="game-title">MURDER 🗡️</div>
-            </a>
-
-            <a href="/games/paperio2/" class="game-card" id="paper.io">
-                <img src="img/paperio.png" alt="paper.io">
-                <div class="game-title">paper.io</div>
-            </a>
-
-            <a href="/games/soccerrandom/" class="game-card" id="Soccer Random">
-                <img src="img/soccerrandom.png" alt="Soccer Random">
-                <div class="game-title">Soccer Random</div>
-            </a>
-
-            <a href="/games/superhot/" class="game-card" id="SUPERHOT">
-                <img src="img/superhot.png" alt="SUPERHOT">
-                <div class="game-title">SUPERHOT</div>
-            </a>
-
-            <a href="/games/timeshooter3/" class="game-card" id="Time Shooter 3">
-                <img src="img/ts3.png" alt="Time Shooter 3">
-                <div class="game-title">Time Shooter 3</div>
-            </a>
-
-            <a href="/games/tinyfishing/" class="game-card" id="Tiny Fishing">
-                <img src="img/tinyfishing.png" alt="Tiny Fishing">
-                <div class="game-title">Tiny Fishing</div>
-            </a>
-
-            <a href="/games/volleyrandom/" class="game-card" id="Volley Random">
-                <img src="img/volleyrandom.png" alt="Volley Random">
-                <div class="game-title">Volley Random</div>
-            </a>
+            <a href="https://forms.gle/ZRD1M73cgp8iv2757" class="game-card" id="Request"><img src="img/gforms-logo.png" alt="Request a game"><div class="game-title">Request a game</div></a>
+            <a href="https://forms.office.com/r/M4RjEEbAYh" class="game-card" id="bugs" style="cursor: pointer;"><img src="img/randomizer.png" alt="report bugs"><div class="game-title">Report Bugs</div></a>
+            <a href="Eaglercraft_1.9.html" class="game-card" id="Minecraft"><img src="img/mc.png" alt="Minecraft (works)"><div class="game-title">Minecraft</div></a>
+            <a href="minesweeper.html" class="game-card" id="Minesweeper"><img src="img/mc.png" alt="Minesweeper (works)"><div class="game-title">Minesweeper</div></a>
+            <a href="Cookie_Clicker/Cookie-Clicker-Source-Code-master/index.html" class="game-card" id="cc" onclick="cookie()"><img src="img/cookieclicker.png" alt="Cookie Clicker (works)"><div class="game-title">Cookie Clicker</div></a>
+            <a href="/assets/games/html/dadish3.html" class="game-card" id="Dadish 3"><img src="img/dadish3.png" alt="Dadish 3 (doesn't work)"><div class="game-title">Dadish 3</div></a>
+            <a href="blocked.html" class="game-card" id="Super Mario 64" onclick="block()"><img src="img/mario64.png" alt="Super Mario 64 (works)"><div class="game-title">Super Mario 64</div></a>
+            <a href="/games/retro-bowl/" class="game-card" id="Retro Bowl"><img src="img/retro-bowl.png" alt="Retro Bowl"><div class="game-title">Retro Bowl</div></a>
+            <a href="/games/rb-college/" class="game-card" id="Retro Bowl College"><img src="img/rb-college.png" alt="Retro Bowl College"><div class="game-title">RB College</div></a>
+            <a href="/games/football-bros/" class="game-card" id="Football Bros"><img src="img/footballbros.png" alt="Football Bros"><div class="game-title">Football Bros</div></a>
+            <a href="/games/polytrack/" class="game-card" id="Polytrack 4"><img src="img/polytrack.png" alt="Polytrack 4"><div class="game-title">Polytrack 4</div></a>
+            <a href="/games/slope/" class="game-card" id="Slope"><img src="img/slope.png" alt="Slope"><div class="game-title">Slope</div></a>
+            <a href="/games/amazing-rope-police/" class="game-card" id="Amazing Rope Police"><img src="img/gta.png" alt="Amazing Rope Police"><div class="game-title">Amazing Rope Police</div></a>
+            <a href="/games/run3/" class="game-card" id="Run 3"><img src="img/run3.png" alt="Run 3"><div class="game-title">Run 3</div></a>
+            <a href="/games/dadish-2/" class="game-card" id="Dadish 2"><img src="img/dadish2.png" alt="Dadish 2"><div class="game-title">Dadish 2</div></a>
+            <a href="/games/dadish/" class="game-card" id="Dadish"><img src="img/dadish.png" alt="Dadish"><div class="game-title">Dadish</div></a>
+            <a href="/games/sandboxels/" class="game-card" id="Sandboxels"><img src="img/sandboxels.png" alt="Sandboxels"><div class="game-title">Sandboxels</div></a>
+            <a href="/games/sandtris/" class="game-card" id="Sandtrix"><img src="img/sandtrix.png" alt="Sandtrix"><div class="game-title">Sandtrix</div></a>
+            <a href="/games/snowrider/" class="game-card" id="Snow Rider"><img src="img/snowrider.png" alt="Snow Rider 3D"><div class="game-title">Snow Rider 3D</div></a>
+            <a href="/games/asmallworldcup/" class="game-card" id="A Small World Cup"><img src="img/aswc2023.png" alt="A Small World Cup 2023"><div class="game-title">A Small World Cup 2023</div></a>
+            <a href="/games/1v1lol/" class="game-card" id="1v1 LOL"><img src="img/1v1lol.png" alt="1v1 LOL"><div class="game-title">1v1 LOL</div></a>
+            <a href="/games/ovo/" class="game-card" id="ovo"><img src="img/ovo.png" alt="OvO"><div class="game-title">OvO</div></a>
+            <a href="/games/basketbros/" class="game-card" id="Basket Bros"><img src="img/basketbros.png" alt="Basket Bros"><div class="game-title">Basket Bros</div></a>
+            <a href="/games/driftboss/" class="game-card" id="drift boss"><img src="img/driftboss.png" alt="Drift Boss"><div class="game-title">Drift Boss</div></a>
+            <a href="/games/html/gd" class="game-card" id="geometry dash gd"><img src="img/gd.png" alt="Geometry Dash"><div class="game-title">Geometry Dash</div></a>
+            <a href="/games/fnaf/" class="game-card" id="FNAF"><img src="img/fnaf.png" alt="FNAF"><div class="game-title">FNAF</div></a>
+            <a href="/games/fnaf2/" class="game-card" id="FNAF 2"><img src="img/fnaf2.png" alt="FNAF 2"><div class="game-title">FNAF 2</div></a>
+            <a href="/games/fnaf3/" class="game-card" id="FNAF 3"><img src="img/fnaf3.png" alt="FNAF 3"><div class="game-title">FNAF 3</div></a>
+            <a href="/games/fnaf4/" class="game-card" id="FNAF 4"><img src="img/fnaf4.png" alt="FNAF 4"><div class="game-title">FNAF 4</div></a>
+            <a href="/games/owt1/" class="game-card" id="OWT 1"><img src="img/owt1.png" alt="One Way Ticket"><div class="game-title">One Way Ticket</div></a>
+            <a href="/games/owt2/" class="game-card" id="OWT 2"><img src="img/owt2.png" alt="One Way Ticket 2"><div class="game-title">One Way Ticket 2</div></a>
+            <a href="/games/html/territorial" class="game-card" id="Territorial"><img src="img/territorial.png" alt="territorial.io"><div class="game-title">territorial.io</div></a>
+            <a href="/games/worldshardestgame/" class="game-card" id="worlds hardest game"><img src="img/whg.png" alt="World's Hardest Game"><div class="game-title">World's Hardest Game</div></a>
+            <a href="/games/tic-tac-toe/" class="game-card" id="ttt"><img src="img/ttt.png" alt="Tic Tac Toe"><div class="game-title">Tic Tac Toe</div></a>
+            <a href="/games/2048/" class="game-card" id="2048"><img src="img/2048.png" alt="2048"><div class="game-title">2048</div></a>
+            <a href="/games/chess/" class="game-card" id="Chess"><img src="img/chess.png" alt="Chess"><div class="game-title">Chess</div></a>
+            <a href="/games/blockblast/" class="game-card" id="Block Blast"><img src="img/blockblast.png" alt="Block Blast"><div class="game-title">Block Blast</div></a>
+            <a href="/games/houseofhazards/" class="game-card" id="House of Hazards"><img src="img/hoh.png" alt="House of Hazards"><div class="game-title">House of Hazards</div></a>
+            <a href="/games/8ball/" class="game-card" id="8 Ball"><img src="img/8ball.png" alt="8 Ball"><div class="game-title">8 Ball</div></a>
+            <a href="/games/basketballstars/" class="game-card" id="Basketball Stars"><img src="img/bballstars.png" alt="Basketball Stars"><div class="game-title">Basketball Stars</div></a>
+            <a href="/games/btts/" class="game-card" id="Big Tower Tiny Square"><img src="img/btts.png" alt="Big Tower Tiny Square"><div class="game-title">Big Tower Tiny Square</div></a>
+            <a href="/games/html/alienshooter.html" class="game-card" id="Alien Shooter"><img src="img/alienshooter.png" alt="Alien Shooter"><div class="game-title">Alien Shooter</div></a>
+            <a href="/games/basketrandom/" class="game-card" id="Basket Random"><img src="img/basketrandom.png" alt="Basket Random"><div class="game-title">Basket Random</div></a>
+            <a href="/games/bitlife/" class="game-card" id="Bitlife"><img src="img/bitlife.png" alt="Bitlife"><div class="game-title">Bitlife</div></a>
+            <a href="/games/boxingrandom/" class="game-card" id="Boxing Random"><img src="img/boxingrandom.png" alt="Boxing Random"><div class="game-title">Boxing Random</div></a>
+            <a href="/games/clusterrush/" class="game-card" id="Cluster Rush"><img src="img/clusterrush.png" alt="Cluster Rush"><div class="game-title">Cluster Rush</div></a>
+            <a href="/games/eggycar/" class="game-card" id="Eggy Car"><img src="img/eggycar.png" alt="Eggy Car"><div class="game-title">Eggy Car</div></a>
+            <a href="/games/html/motox3m.html" class="game-card" id="Moto X3M"><img src="img/motox3m.png" alt="Moto X3M"><div class="game-title">Moto X3M</div></a>
+            <a href="/games/html/motox3m2.html" class="game-card" id="Moto X3M 2"><img src="img/moto2.png" alt="Moto X3M 2"><div class="game-title">Moto X3M 2</div></a>
+            <a href="/games/html/motox3m3.html" class="game-card" id="Moto X3M 3"><img src="img/moto3.png" alt="Moto X3M 3"><div class="game-title">Moto X3M 3</div></a>
+            <a href="/games/murder/" class="game-card" id="MURDER"><img src="img/murder.png" alt="MURDER"><div class="game-title">MURDER 🗡️</div></a>
+            <a href="/games/paperio2/" class="game-card" id="paper.io"><img src="img/paperio.png" alt="paper.io"><div class="game-title">paper.io</div></a>
+            <a href="/games/soccerrandom/" class="game-card" id="Soccer Random"><img src="img/soccerrandom.png" alt="Soccer Random"><div class="game-title">Soccer Random</div></a>
+            <a href="/games/superhot/" class="game-card" id="SUPERHOT"><img src="img/superhot.png" alt="SUPERHOT"><div class="game-title">SUPERHOT</div></a>
+            <a href="/games/timeshooter3/" class="game-card" id="Time Shooter 3"><img src="img/ts3.png" alt="Time Shooter 3"><div class="game-title">Time Shooter 3</div></a>
+            <a href="/games/tinyfishing/" class="game-card" id="Tiny Fishing"><img src="img/tinyfishing.png" alt="Tiny Fishing"><div class="game-title">Tiny Fishing</div></a>
+            <a href="/games/volleyrandom/" class="game-card" id="Volley Random"><img src="img/volleyrandom.png" alt="Volley Random"><div class="game-title">Volley Random</div></a>
         </div>
     </main>
 
     <script>
         function filterGames() {
             const query = document.getElementById('gameSearch').value.toLowerCase();
-            const gameCards = document.querySelectorAll('.game-card');
-            
-            gameCards.forEach(card => {
+            document.querySelectorAll('.game-card').forEach(card => {
                 const cardId = card.id.toLowerCase();
                 const cardTitle = card.querySelector('.game-title').textContent.toLowerCase();
-
-                if (cardId.includes(query) || cardTitle.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (cardId.includes(query) || cardTitle.includes(query)) ? 'flex' : 'none';
             });
         }
         
-        // Original functions from your file
-        function refreshWarning() {
-          window.alert('In case of a black screen, please reload and try again \n Always wait before clicking enter. \n CLICKING TRIGGERS BLACK SCREEN!')
+        function block() { localStorage.setItem("accessGranted", "bob"); }
+        function cookie() { console.log("cookie activated"); }
+
+        // --- DATA PORTABILITY FUNCTIONS ---
+        function sanitizeData(obj, maxStringLen = 1000, maxArrayLen = 10000) {
+            if (typeof obj === 'string') return obj.length > maxStringLen ? obj.slice(0, maxStringLen) + '...[truncated]' : obj;
+            if (obj instanceof Uint8Array) return obj.length > maxArrayLen ? `[Uint8Array too large]` : obj;
+            if (Array.isArray(obj)) return obj.map(item => sanitizeData(item, maxStringLen, maxArrayLen));
+            if (obj && typeof obj === 'object') {
+                const newObj = {};
+                for (const key in obj) {
+                    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                        newObj[key] = sanitizeData(obj[key], maxStringLen, maxArrayLen);
+                    }
+                }
+                return newObj;
+            }
+            return obj;
         }
-        function block() {
-          localStorage.setItem("accessGranted", "bob");
+
+        async function saveData() {
+            alert("Exporting all your game progress. This might take a moment.");
+            const result = {
+                cookies: document.cookie,
+                localStorage: {...localStorage},
+                sessionStorage: {...sessionStorage},
+                indexedDB: {},
+                caches: {}
+            };
+            try {
+                const dbs = await indexedDB.databases();
+                for (const dbInfo of dbs) {
+                    if (!dbInfo.name) continue;
+                    result.indexedDB[dbInfo.name] = {};
+                    await new Promise((resolve, reject) => {
+                        const openRequest = indexedDB.open(dbInfo.name, dbInfo.version);
+                        openRequest.onerror = () => reject(openRequest.error);
+                        openRequest.onsuccess = () => {
+                            const db = openRequest.result;
+                            const storeNames = Array.from(db.objectStoreNames);
+                            if (storeNames.length === 0) { resolve(); return; }
+                            const transaction = db.transaction(storeNames, "readonly");
+                            const storePromises = storeNames.map(storeName => new Promise((res, rej) => {
+                                result.indexedDB[dbInfo.name][storeName] = [];
+                                const store = transaction.objectStore(storeName);
+                                const getAllRequest = store.getAll();
+                                getAllRequest.onsuccess = () => {
+                                    result.indexedDB[dbInfo.name][storeName] = sanitizeData(getAllRequest.result, 1000, 100);
+                                    res();
+                                };
+                                getAllRequest.onerror = () => rej(getAllRequest.error);
+                            }));
+                            Promise.all(storePromises).then(() => resolve());
+                        };
+                    });
+                }
+                const cacheNames = await caches.keys();
+                for (const cacheName of cacheNames) {
+                    const cache = await caches.open(cacheName);
+                    const requests = await cache.keys();
+                    result.caches[cacheName] = [];
+                    for (const req of requests) {
+                        const response = await cache.match(req);
+                        if (!response) continue;
+                        const cloned = response.clone();
+                        const contentType = cloned.headers.get('content-type') || '';
+                        let body;
+                        try {
+                            if (contentType.includes('json')) body = await cloned.json();
+                            else if (contentType.includes('text') || contentType.includes('javascript')) body = await cloned.text();
+                            else {
+                                const buffer = await cloned.arrayBuffer();
+                                body = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+                            }
+                        } catch (e) { body = '[Unable to read body]'; }
+                        result.caches[cacheName].push({ url: req.url, body, contentType });
+                    }
+                }
+                alert("Export complete! Your download will begin now.");
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(new Blob([JSON.stringify(result)], { type: "text/plain" }));
+                link.download = `classplay-data-${Date.now()}.json`;
+                link.click();
+                link.remove();
+            } catch (error) {
+                console.error("Error saving data:", error);
+                alert("An error occurred while exporting your data.");
+            }
         }
-        function cookie() {
-          console.log("cookie activated");
+
+        function loadData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                alert("Importing data. The page will reload when finished.");
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.cookies) { data.cookies.split(';').forEach(cookie => { document.cookie = cookie.trim(); }); }
+                    if (data.localStorage) { for (const key in data.localStorage) { localStorage.setItem(key, data.localStorage[key]); } }
+                    if (data.sessionStorage) { for (const key in data.sessionStorage) { sessionStorage.setItem(key, data.sessionStorage[key]); } }
+                    if (data.indexedDB) {
+                        for (const dbName in data.indexedDB) {
+                            const stores = data.indexedDB[dbName];
+                            const dbVersion = stores.version || 1;
+                            await new Promise((resolve, reject) => {
+                                const request = indexedDB.open(dbName, dbVersion);
+                                request.onupgradeneeded = e => {
+                                    const db = e.target.result;
+                                    for (const storeName in stores) {
+                                        if (!db.objectStoreNames.contains(storeName) && storeName !== 'version') {
+                                            db.createObjectStore(storeName, { autoIncrement: true });
+                                        }
+                                    }
+                                };
+                                request.onsuccess = e => {
+                                    const db = e.target.result;
+                                    const storeNames = Object.keys(stores).filter(name => name !== 'version');
+                                    if(storeNames.length === 0) return resolve();
+                                    const transaction = db.transaction(storeNames, 'readwrite');
+                                    transaction.onerror = () => reject(transaction.error);
+                                    let pending = storeNames.length;
+                                    for (const storeName of storeNames) {
+                                        const objectStore = transaction.objectStore(storeName);
+                                        objectStore.clear().onsuccess = () => {
+                                            stores[storeName].forEach(item => {
+                                                try {
+                                                  objectStore.put(item)
+                                                } catch(err) {
+                                                  console.warn(`Could not add item to ${storeName}:`, item, err)
+                                                }
+                                            });
+                                            if (--pending === 0) resolve();
+                                        };
+                                    }
+                                };
+                                request.onerror = () => reject(request.error);
+                            });
+                        }
+                    }
+                    if (data.caches) {
+                        for (const cacheName in data.caches) {
+                            const cache = await caches.open(cacheName);
+                            await cache.keys().then(keys => Promise.all(keys.map(k => cache.delete(k))));
+                            for (const entry of data.caches[cacheName]) {
+                                let responseBody;
+                                if (entry.contentType.includes('json')) responseBody = JSON.stringify(entry.body);
+                                else if (entry.contentType.includes('text') || entry.contentType.includes('javascript')) responseBody = entry.body;
+                                else {
+                                    const binaryStr = atob(entry.body);
+                                    const bytes = new Uint8Array(binaryStr.length);
+                                    for (let i = 0; i < binaryStr.length; i++) { bytes[i] = binaryStr.charCodeAt(i); }
+                                    responseBody = bytes.buffer;
+                                }
+                                const response = new Response(responseBody, { headers: { 'content-type': entry.contentType } });
+                                await cache.put(entry.url, response);
+                            }
+                        }
+                    }
+                    alert("Data loaded successfully! The page will now reload.");
+                    window.location.reload();
+                } catch(error) {
+                    console.error("Error loading data:", error);
+                    alert("Failed to import data. The file may be corrupt.");
+                }
+            };
+            reader.readAsText(file);
         }
     </script>
 </body>
 </html>
-
-
-
-

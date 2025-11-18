@@ -1,4 +1,4 @@
-const validCodes = ["Yqcne2", "Omv46U", "L3v2I0", "fxFl6s", "ZlO3Gy", "t760kv", "006I09", "7cu2ZG", "U9P0Nl", "mjzRK3", "XXXXXX", "dadish3", "bob", "Michael", "6767", "67"];
+const validCodes = ["Yqcne2", "Omv46U", "L3v2I0", "fxFl6s", "ZlO3Gy", "t760kv", "006I09", "7cu2ZG", "U9P0Nl", "mjzRK3", "XXXXXX", "dadish3", "bob", "Michael", "6767", "67", "rjgiorjgio"];
 
 // --- Redirection Logic ---
 if (window.location.pathname.endsWith("blocked.html") && localStorage.getItem("accessGranted") === "true") {
@@ -77,4 +77,5 @@ document.addEventListener('fullscreenchange', function() {
         iframe.contentWindow.postMessage('resetSequence', '*');
     }
 });
+
 

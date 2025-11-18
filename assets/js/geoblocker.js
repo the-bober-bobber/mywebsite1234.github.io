@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkInviteCode() {
     const inviteCodeInput = document.getElementById("invite-code");
     const errorMessage = document.getElementById('error-message');
-    const inputCode = inviteCodeInput.value.trim();
+    const inputCode = inviteCodeInput.value.replace(/\s/g, '').trim();
     const iframe = document.getElementById("myIframe");
 
     if (validCodes.includes(inputCode)) {
@@ -77,6 +77,7 @@ document.addEventListener('fullscreenchange', function() {
         iframe.contentWindow.postMessage('resetSequence', '*');
     }
 });
+
 
 
 

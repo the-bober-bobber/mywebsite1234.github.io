@@ -49,7 +49,7 @@ function checkInviteCode() {
 
   if (validCodes.includes(inputCode)) {
     localStorage.setItem("accessGranted", "true");
-    window.location.href = "../../index.html";
+    window.location.href = "../..";
   } else if (blank.includes(inputCode)) {
     console.log("blank");
   } else {
@@ -64,6 +64,7 @@ function checkInviteCode() {
   }
 
 }
+
 
 
 

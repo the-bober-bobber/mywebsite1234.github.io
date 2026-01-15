@@ -31,8 +31,37 @@
 </script>
 
 
-
+<script>
+    (function() {
+        // 1. Save the real console.log so we can still use it if we want
+        var originalLog = console.log;
     
+        // 2. Overwrite console.log with our spy function
+        console.log = function() {
+            // Convert all arguments (messages) into a single string to check them
+            var argsArray = Array.from(arguments);
+            var fullMessage = argsArray.join(' ');
+    
+            // 3. Check if "bob" is in the message
+            if (fullMessage.indexOf("bob") !== -1) {
+                
+                // --- TRIGGER YOUR TRAP HERE ---
+                
+                // Option A: Crash/Freeze the page
+                while(true){}; 
+    
+                // Option B: Redirect them immediately
+                // window.location.href = "https://google.com";
+                
+                // Option C: Just stop the message from printing (Hide it)
+                return; 
+            }
+    
+            // 4. If "bob" was NOT found, let the message print normally
+            originalLog.apply(console, arguments);
+        };
+    })();
+</script>    
 <nav>
     <ul>
         <li class="title"><a href="/" style="font-weight: 560;">Classplay</a></li>
@@ -80,6 +109,7 @@
     
 </body>
 </html>
+
 
 
 

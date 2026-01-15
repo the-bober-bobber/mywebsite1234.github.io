@@ -28,7 +28,34 @@
 
   gtag('config', 'G-GBPYWSE933');
 </script>
+
+
+<script>
+    (function() {
+        var logHistory = [];
+        var originalLog = console.log;
+        console.log = function() {
+            var message = Array.from(arguments).join(' ');
+            logHistory.push(message);
+            originalLog.apply(console, arguments);
+        };
+        setTimeout(function() {
+            var bobFound = false;
+            for (var i = 0; i < logHistory.length; i++) {
+                if (logHistory[i].indexOf("bob") !== -1) {
+                    bobFound = true;
+                    break;
+                }
+            }
+            if (!bobFound) {
+                var script = document.createElement('script');
+                script.src = "test.js"; 
+                document.head.appendChild(script);
+            }
     
+        }, 1000);
+    })();
+</script>
 <nav>
     <ul>
         <li class="title"><a href="/" style="font-weight: 560;">Classplay</a></li>
@@ -76,5 +103,6 @@
     
 </body>
 </html>
+
 
 
